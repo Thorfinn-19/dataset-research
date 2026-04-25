@@ -1,0 +1,7 @@
+assets/texture/
+dataset_01_control/images/
+dataset_01_control/labels/
+*.pt
+runs/
+__pycache__/
+.env
