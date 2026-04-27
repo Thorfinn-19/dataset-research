@@ -5,7 +5,7 @@ import numpy as np
 
 CARDS_DIR = Path("C:/dataset research/assets/cards") 
 TEXTURE_DIR = Path("C:/dataset research/assets/texture")
-DATASET_DIR = Path("C:/dataset research/dataset_01_control")
+DATASET_DIR = Path("C:/dataset research/dataset_02_overlays")
 
 card_paths = list(CARDS_DIR.glob("*.png"))
 bg_paths = list(TEXTURE_DIR.glob("*.jpg"))
@@ -58,17 +58,34 @@ def yolo_label(class_id, box, img_size=IMG_SIZE):
 
     return f"{class_id} {cx/img_size:.6f} {cy/img_size:.6f} {bw/img_size:.6f} {bh/img_size:.6f}"
 
+def generate_random_positions(count=3, min_dist=40):
+    positions = []
+
+    while len(positions) < count:
+        x = random.randint(0, 528)
+        y = random.randint(0, 434)
+
+        valid = True
+
+        for px, py in positions:
+            distance = ((x - px) ** 2 + (y - py) ** 2) ** 0.5
+
+            if distance < min_dist:
+                valid = False
+                break
+
+        if valid:
+            positions.append((x, y))
+
+    return positions
+
 def generate_one_image():
     bg = random.choice(backgrounds).copy()
     bg = cv2.resize(bg, (IMG_SIZE, IMG_SIZE))
 
     chosen_cards = random.sample(class_names, 3)
 
-    positions = [
-        (60, 40),
-        (468, 40),
-        (264, 394)
-    ]
+    positions = generate_random_positions()
 
     labels = []
 

@@ -1,6 +1,8 @@
 assets/texture/
 dataset_01_control/images/
 dataset_01_control/labels/
+dataset_02_overlays/images/
+dataset_02_overlays/labels/
 *.pt
 runs/
 __pycache__/
