@@ -117,4 +117,4 @@ def save_split(split, count, start_idx=0):
 save_split("train", 4000, 0)
 save_split("val", 500, 4000)
 
-print("dataset_01_control elkészült.")
+print("dataset_02_overlays elkészült.")
